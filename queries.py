@@ -2,7 +2,18 @@
 
 def detailed_movies(db):
     '''return the list of movies with their genres and director name'''
-    pass  # YOUR CODE HERE
+    query = """
+    SELECT movies.title, movies.genres,directors.name
+    FROM Movies
+    JOIN directors ON movies.director_id  = directors.id
+    """
+    db.execute(query)
+    result = db.fetchall()
+    result_list = []
+    for elem in result:
+        result_list.append(elem[0][0])
+    return result_list
+
 
 
 def late_released_movies(db):
